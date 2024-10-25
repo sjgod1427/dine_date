@@ -25,7 +25,7 @@ class _SplashScreen extends State<SplashScreen> {
   }
 
   startTimer() {
-    var duration = const Duration(seconds: 2);
+    var duration = const Duration(seconds: 3);
     return Timer(duration, route);
   }
 

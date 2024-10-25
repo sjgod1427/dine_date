@@ -97,18 +97,21 @@
 //   }
 // }
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dine_date/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:dine_date/blocs/setup_data_bloc/setup_data_bloc.dart';
 import 'package:dine_date/screens/auth/blocs/sign_in_bloc/sign_in_bloc_bloc.dart';
 import 'package:dine_date/screens/home/views/home_screen.dart';
 import 'package:dine_date/screens/home/views/matches.dart';
 import 'package:dine_date/screens/profile/views/profile_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart'; // Ensure you import the required Flutter material packages
 //import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart'; // Import the package
 import 'package:flutter_bloc/flutter_bloc.dart'; // Ensure other imports you need
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:user_repository/user_repository.dart';
 
 class PersistentTabScreen extends StatefulWidget {
   const PersistentTabScreen({Key? key}) : super(key: key);
@@ -120,7 +123,35 @@ class PersistentTabScreen extends StatefulWidget {
 class _PersistentTabScreenState extends State<PersistentTabScreen> {
   int _currentIndex = 0; // Track the current index
   final List<Widget> _screens = [
-    HomeScreen(),
+    MultiBlocProvider(
+      providers: [
+        // First, provide the AuthenticationBloc
+        BlocProvider(
+          create: (context) => AuthenticationBloc(
+            userRepository:
+                context.read<UserRepository>(), // Pass UserRepository
+            firebaseAuth: FirebaseAuth
+                .instance, // Assuming you want to initialize FirebaseAuth
+            firestore: FirebaseFirestore
+                .instance, // Assuming you want to initialize Firestore
+          ),
+        ),
+        // Next, provide SignInBloc, which depends on AuthenticationBloc
+        BlocProvider(
+          create: (context) => SignInBloc(
+            userRepository: context.read<AuthenticationBloc>().userRepository,
+            // Add necessary initialization
+          ),
+        ),
+        // Lastly, provide SetupDataBloc
+        BlocProvider(
+          create: (context) =>
+              SetupDataBloc(context.read<AuthenticationBloc>().userRepository),
+        ),
+      ],
+      child: const HomeScreen(),
+    ),
+
     Matches(), // Your Home Screen widget
     MultiBlocProvider(
       providers: [

@@ -343,7 +343,46 @@ class AddPhotoScreen extends StatefulWidget {
 }
 
 class _AddPhotoScreenState extends State<AddPhotoScreen> {
-  List<String> images = [];
+  final List<String> images = [];
+  final ImagePicker picker = ImagePicker();
+
+  Future<void> _pickImageFromGallery() async {
+    try {
+      final XFile? image =
+          await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+
+      if (image == null) return;
+
+      if (mounted) {
+        final croppedFile = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatio: const CropAspectRatio(ratioX: 9, ratioY: 16),
+          uiSettings: [
+            AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: Theme.of(context).colorScheme.primary,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false,
+            ),
+            IOSUiSettings(title: 'Cropper'),
+          ],
+        );
+
+        if (croppedFile != null && mounted) {
+          setState(() {
+            images.add(croppedFile.path);
+          });
+          Navigator.pop(context, images);
+        }
+      }
+    } catch (e) {
+      debugPrint('Error picking or cropping image: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Failed to pick image")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -353,10 +392,9 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(CupertinoIcons.clear)),
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(CupertinoIcons.clear),
+        ),
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
@@ -377,52 +415,58 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                 style: TextStyle(fontWeight: FontWeight.w300),
               ),
               Expanded(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () async {
-                      final ImagePicker picker = ImagePicker();
-                      final XFile? image = await picker.pickImage(
-                          source: ImageSource.gallery, imageQuality: 80);
-
-                      if (image != null && mounted) {
-                        CroppedFile? croppedFile =
-                            await ImageCropper().cropImage(
-                          sourcePath: image.path,
-                          aspectRatio:
-                              const CropAspectRatio(ratioX: 9, ratioY: 16),
-                          //	aspectRatioPresets: [],
-                          uiSettings: [
-                            AndroidUiSettings(
-                                toolbarTitle: 'Cropper',
-                                toolbarColor:
-                                    Theme.of(context).colorScheme.primary,
-                                toolbarWidgetColor: Colors.white,
-                                initAspectRatio: CropAspectRatioPreset.original,
-                                lockAspectRatio: false),
-                            IOSUiSettings(
-                              title: 'Cropper',
-                            ),
-                          ],
-                        );
-
-                        if (croppedFile != null && mounted) {
-                          setState(() {
-                            images.add(croppedFile.path);
-                          });
-                          Navigator.pop(context, images);
-                        }
-                      }
-                    },
-                    child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: _pickImageFromGallery,
+                      child: Container(
+                        width: double.infinity,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage("assets/images/pic.png"),
+                          ),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.only(left: 40),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Upload",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                "Photo",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Container(
                       width: double.infinity,
                       height: 120,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/images/pic.png"))),
+                        borderRadius: BorderRadius.circular(20),
+                        image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage("assets/images/camera.png"),
+                        ),
+                      ),
                       child: const Padding(
                         padding: EdgeInsets.only(left: 40),
                         child: Column(
@@ -430,59 +474,27 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Upload",
+                              "Capture from",
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             Text(
-                              "Photo",
+                              "Camera",
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                              ),
                             )
                           ],
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 120,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/images/camera.png"))),
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 40),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Capture from",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            "Camera",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ))
+                  ],
+                ),
+              )
             ],
           ),
         ),
