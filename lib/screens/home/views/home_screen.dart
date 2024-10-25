@@ -34,6 +34,19 @@ class _HomeScreenState extends State<HomeScreen> {
     fetchUsers(); // Call fetchUsers to populate the swipe items
   }
 
+  Future<void> updateLikedBy(String currentUserId, String likedUserId) async {
+    try {
+      // Update the likedBy field of the current user
+      await _firestore.collection('users').doc(currentUserId).update({
+        'likedBy': FieldValue.arrayUnion(
+            [likedUserId]), // Add likedUserId to the likedBy array
+      });
+      log("User $likedUserId liked by $currentUserId");
+    } catch (e) {
+      log("Error updating likedBy field: $e");
+    }
+  }
+
   Future<void> fetchUsers() async {
     final currentUser = FirebaseAuth.instance.currentUser;
 
@@ -61,8 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   content: user,
                   likeAction: () {
                     log("Like user: ${user.userId}");
-                    BlocProvider.of<AuthenticationBloc>(context)
-                        .add(LikeUser(user.userId));
+                    // Add the user ID to the current user's likedBy list
+                    updateLikedBy(currentUser.uid, user.userId);
                   },
                   nopeAction: () {
                     log("Nope user: ${user.userId}");
@@ -165,12 +178,16 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(user.pictures.isNotEmpty
-                            ? user.pictures.first
-                            : "assets/images/default.png"))),
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: user.pictures.isNotEmpty
+                        ? NetworkImage(user.pictures.first)
+                        : const AssetImage(
+                            "assets/images/girl.png",
+                          ),
+                  ),
+                ),
               ),
               Container(
                 decoration: BoxDecoration(
