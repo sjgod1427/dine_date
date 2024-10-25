@@ -40,6 +40,8 @@ dependencies:
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
   rive: ^0.13.15
+  cloud_firestore: ^5.4.4
+  firebase_storage: ^12.3.4
 
   persistent_bottom_nav_bar_v2: ^5.3.1
   swipe_cards: ^2.0.0+1

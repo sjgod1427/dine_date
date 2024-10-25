@@ -101,6 +101,7 @@ import 'package:dine_date/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:dine_date/blocs/setup_data_bloc/setup_data_bloc.dart';
 import 'package:dine_date/screens/auth/blocs/sign_in_bloc/sign_in_bloc_bloc.dart';
 import 'package:dine_date/screens/home/views/home_screen.dart';
+import 'package:dine_date/screens/home/views/matches.dart';
 import 'package:dine_date/screens/profile/views/profile_screen.dart';
 import 'package:flutter/material.dart'; // Ensure you import the required Flutter material packages
 //import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart'; // Import the package
@@ -119,7 +120,8 @@ class PersistentTabScreen extends StatefulWidget {
 class _PersistentTabScreenState extends State<PersistentTabScreen> {
   int _currentIndex = 0; // Track the current index
   final List<Widget> _screens = [
-    HomeScreen(), // Your Home Screen widget
+    HomeScreen(),
+    Matches(), // Your Home Screen widget
     MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -130,7 +132,7 @@ class _PersistentTabScreenState extends State<PersistentTabScreen> {
         BlocProvider(
           create: (context) =>
               SetupDataBloc(context.read<AuthenticationBloc>().userRepository),
-        )
+        ),
       ],
       child: const ProfileScreen(),
     ),
@@ -193,7 +195,8 @@ class CustomBottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround, // Aligns icons evenly
         children: [
           _buildNavItem(Icons.wine_bar_outlined, 0, context),
-          _buildNavItem(Icons.person, 1, context),
+          _buildNavItem(Icons.chat, 1, context),
+          _buildNavItem(Icons.person, 2, context)
         ],
       ),
     );

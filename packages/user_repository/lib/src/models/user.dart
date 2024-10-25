@@ -8,26 +8,27 @@ class MyUser {
   String description;
   final Map<String, dynamic> location;
   List<dynamic> pictures;
+  final List<dynamic> likedBy;
 
-  MyUser({
-    required this.userId,
-    required this.email,
-    required this.name,
-    required this.age,
-    required this.description,
-    required this.location,
-    required this.pictures,
-  });
+  MyUser(
+      {required this.userId,
+      required this.email,
+      required this.name,
+      required this.age,
+      required this.description,
+      required this.location,
+      required this.pictures,
+      required this.likedBy});
 
   static final empty = MyUser(
-    userId: '',
-    email: '',
-    name: '',
-    age: 0,
-    description: '',
-    location: {},
-    pictures: [],
-  );
+      userId: '',
+      email: '',
+      name: '',
+      age: 0,
+      description: '',
+      location: {},
+      pictures: [],
+      likedBy: []);
 
   MyUser copyWith(
       {String? userId,
@@ -36,7 +37,8 @@ class MyUser {
       int? age,
       String? description,
       Map<String, double>? location,
-      List<String>? pictures}) {
+      List<String>? pictures,
+      List<dynamic>? likedBy}) {
     return MyUser(
         userId: userId ?? this.userId,
         email: email ?? this.email,
@@ -44,19 +46,20 @@ class MyUser {
         age: age ?? this.age,
         description: description ?? this.description,
         location: location ?? this.location,
-        pictures: pictures ?? this.pictures);
+        pictures: pictures ?? this.pictures,
+        likedBy: likedBy ?? this.likedBy);
   }
 
   MyUserEntity toEntity() {
     return MyUserEntity(
-      userId: userId,
-      email: email,
-      name: name,
-      age: age,
-      description: description,
-      location: location,
-      pictures: pictures,
-    );
+        userId: userId,
+        email: email,
+        name: name,
+        age: age,
+        description: description,
+        location: location,
+        pictures: pictures,
+        likedBy: likedBy);
   }
 
   static MyUser fromEntity(MyUserEntity entity) {
@@ -67,7 +70,8 @@ class MyUser {
         age: entity.age,
         description: entity.description,
         location: entity.location,
-        pictures: entity.pictures);
+        pictures: entity.pictures,
+        likedBy: entity.likedBy);
   }
 
   @override
@@ -80,6 +84,7 @@ class MyUser {
   description: $description, 
   location: $location,
   pictures: $pictures,
+  likedBy:$likedBy
   ''';
   }
 }

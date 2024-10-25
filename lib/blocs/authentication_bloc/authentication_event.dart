@@ -26,3 +26,12 @@ class AuthenticationUserChanged extends AuthenticationEvent {
 
   const AuthenticationUserChanged(this.user);
 }
+
+class LikeUser extends AuthenticationEvent {
+  final String likedUserId;
+
+  const LikeUser(this.likedUserId);
+
+  @override
+  List<Object> get props => [likedUserId];
+}

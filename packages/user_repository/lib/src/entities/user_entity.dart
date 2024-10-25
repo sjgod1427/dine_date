@@ -6,16 +6,17 @@ class MyUserEntity {
   final String description;
   final Map<String, dynamic> location;
   final List<dynamic> pictures;
+  final List<dynamic> likedBy;
 
-  const MyUserEntity({
-    required this.userId,
-    required this.email,
-    required this.name,
-    required this.age,
-    required this.description,
-    required this.location,
-    required this.pictures,
-  });
+  const MyUserEntity(
+      {required this.userId,
+      required this.email,
+      required this.name,
+      required this.age,
+      required this.description,
+      required this.location,
+      required this.pictures,
+      required this.likedBy});
 
   Map<String, Object?> toDocument() {
     return {
@@ -25,7 +26,8 @@ class MyUserEntity {
       'age': age,
       'description': description,
       'location': location,
-      'pictures': pictures
+      'pictures': pictures,
+      'likedBy': likedBy
     };
   }
 
@@ -37,6 +39,7 @@ class MyUserEntity {
         age: doc['age'],
         description: doc['description'],
         location: doc['location'],
-        pictures: doc['pictures']);
+        pictures: doc['pictures'],
+        likedBy: doc['likedBy']);
   }
 }
