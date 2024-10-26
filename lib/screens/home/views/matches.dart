@@ -1,3 +1,4 @@
+import 'package:dine_date/components/payment_gateway.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -81,7 +82,7 @@ class _MutualLikesScreenState extends State<Matches> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Placeholder(),
+                        builder: (context) => const RazorPayPage(),
                       ),
                     );
                   },
