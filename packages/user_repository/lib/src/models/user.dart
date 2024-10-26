@@ -6,6 +6,7 @@ class MyUser {
   final String email;
   final String name;
   final int age;
+  String pronouns;
   String description;
   String MyCrzyFoodStory;
   String Diet;
@@ -23,6 +24,7 @@ class MyUser {
     required this.email,
     required this.name,
     required this.age,
+    required this.pronouns,
     required this.description,
     required this.MyCrzyFoodStory,
     required this.Diet,
@@ -42,6 +44,7 @@ class MyUser {
     email: '',
     name: '',
     age: 0,
+    pronouns: '',
     description: '',
     MyCrzyFoodStory: '',
     Diet: '',
@@ -63,6 +66,7 @@ class MyUser {
       email: data['email'] ?? '',
       name: data['name'] ?? 'Unknown',
       age: data['age'] ?? 0,
+      pronouns: data['gender'] ?? '',
       description: data['description'] ?? '',
       MyCrzyFoodStory: data['MyCrzyFoodStory'] ?? '',
       Diet: data['Diet'] ?? '',
@@ -84,6 +88,7 @@ class MyUser {
     String? email,
     String? name,
     int? age,
+    String? pronouns,
     String? description,
     String? MyCrzyFoodStory,
     String? Diet,
@@ -101,6 +106,7 @@ class MyUser {
       email: email ?? this.email,
       name: name ?? this.name,
       age: age ?? this.age,
+      pronouns: pronouns ?? this.pronouns,
       description: description ?? this.description,
       MyCrzyFoodStory: MyCrzyFoodStory ?? this.MyCrzyFoodStory,
       Diet: Diet ?? this.Diet,
@@ -125,6 +131,7 @@ class MyUser {
       email: email,
       name: name,
       age: age,
+      pronouns: pronouns,
       description: description,
       MyCrzyFoodStory: MyCrzyFoodStory,
       Diet: Diet,
@@ -146,6 +153,7 @@ class MyUser {
       email: entity.email,
       name: entity.name,
       age: entity.age,
+      pronouns: entity.pronouns,
       description: entity.description,
       MyCrzyFoodStory: entity.MyCrzyFoodStory,
       Diet: entity.Diet,

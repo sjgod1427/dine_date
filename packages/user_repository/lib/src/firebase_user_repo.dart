@@ -232,7 +232,11 @@ class FirebaseUserRepo implements UserRepository {
           'MyCrzyFoodStory': myUser.MyCrzyFoodStory,
           'Diet': myUser.Diet,
           'EatingHabits': myUser.EatingHabits,
-          'DineInOut': myUser.DineInOut
+          'DineInOut': myUser.DineInOut,
+          'pronouns': myUser.pronouns,
+          'FavouriteCuisine': myUser.FavouritCuisine,
+          'FavouriteResturant': myUser.FavouriteResturants,
+          'PlacesWannaVisit': myUser.PlacesWannaVisit
         },
       );
 

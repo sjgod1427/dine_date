@@ -3,6 +3,7 @@ class MyUserEntity {
   final String email;
   final String name;
   final int age;
+  final String pronouns;
   final String description;
   final String MyCrzyFoodStory;
   final String Diet;
@@ -20,6 +21,7 @@ class MyUserEntity {
     required this.email,
     required this.name,
     required this.age,
+    required this.pronouns,
     required this.description,
     required this.MyCrzyFoodStory,
     required this.Diet,
@@ -39,6 +41,7 @@ class MyUserEntity {
       'email': email,
       'name': name,
       'age': age,
+      'pronouns': pronouns,
       'description': description,
       'MyCrzyFoodStory': MyCrzyFoodStory,
       'Diet': Diet,
@@ -59,6 +62,7 @@ class MyUserEntity {
       email: doc['email'],
       name: doc['name'],
       age: doc['age'],
+      pronouns: doc['pronouns'],
       description: doc['description'],
       MyCrzyFoodStory: doc['MyCrzyFoodStory'],
       Diet: doc['Diet'],

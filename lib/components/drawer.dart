@@ -55,9 +55,7 @@ class MainDrawer extends StatelessWidget {
                   .titleSmall!
                   .copyWith(color: Colors.white),
             ),
-            onTap: () {
-              // onSelectScreen('Filters');
-            }),
+            onTap: () {}),
       ],
     ));
   }

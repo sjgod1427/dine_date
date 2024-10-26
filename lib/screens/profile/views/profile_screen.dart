@@ -18,9 +18,15 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController myStoryController = TextEditingController();
+  TextEditingController placesWannaVisitController = TextEditingController();
+  TextEditingController favouriteCuisineController = TextEditingController();
+  TextEditingController favouriteRestaurantsController =
+      TextEditingController();
+
   String selectedDiet = '';
   String selectedEatingHabit = '';
   String selectedDineInOut = '';
+  String selectedPronoun = '';
 
   final List<String> dietOptions = [
     'Vegetarian',
@@ -45,6 +51,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     'StreetFood HUNT'
   ];
 
+  final List<String> pronounOptions = [
+    'He/Him',
+    'She/Her',
+    'They/Them',
+    'Ze/Zir',
+    'Xe/Xem'
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -57,6 +71,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     selectedDiet = context.read<AuthenticationBloc>().state.user!.Diet ?? '';
     selectedDineInOut =
         context.read<AuthenticationBloc>().state.user!.DineInOut ?? '';
+    selectedPronoun =
+        context.read<AuthenticationBloc>().state.user!.pronouns ?? '';
+
+    placesWannaVisitController.text =
+        context.read<AuthenticationBloc>().state.user!.PlacesWannaVisit ?? '';
+    favouriteCuisineController.text =
+        context.read<AuthenticationBloc>().state.user!.FavouritCuisine ?? '';
+    favouriteRestaurantsController.text =
+        context.read<AuthenticationBloc>().state.user!.FavouriteResturants ??
+            '';
   }
 
   @override
@@ -78,6 +102,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   selectedEatingHabit;
               context.read<AuthenticationBloc>().state.user!.DineInOut =
                   selectedDineInOut;
+              context.read<AuthenticationBloc>().state.user!.pronouns =
+                  selectedPronoun;
+
+              context.read<AuthenticationBloc>().state.user!.description =
+                  descriptionController.text;
+              context.read<AuthenticationBloc>().state.user!.MyCrzyFoodStory =
+                  myStoryController.text;
+              context.read<AuthenticationBloc>().state.user!.PlacesWannaVisit =
+                  placesWannaVisitController.text;
+              context.read<AuthenticationBloc>().state.user!.FavouritCuisine =
+                  favouriteCuisineController.text;
+              context
+                  .read<AuthenticationBloc>()
+                  .state
+                  .user!
+                  .FavouriteResturants = favouriteRestaurantsController.text;
             });
             print(context.read<AuthenticationBloc>().state.user!);
 
@@ -303,6 +343,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Text(
+                "Pronouns",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              color: Colors.white,
+              child: DropdownButtonFormField<String>(
+                value: selectedPronoun.isEmpty ? null : selectedPronoun,
+                items: pronounOptions.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                ),
+                hint: const Text("Select your pronoun"),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedPronoun = newValue ?? '';
+                  });
+                },
+              ),
+            ),
+            const SizedBox(height: 30),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Text(
                 "About me",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
@@ -435,6 +507,72 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     selectedDineInOut = newValue ?? '';
                   });
                 },
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                "Places I Want to Visit",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              color: Colors.white,
+              child: TextFormField(
+                controller: placesWannaVisitController,
+                maxLines: 2,
+                minLines: 1,
+                decoration: const InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  hintText: "E.g., Paris, Tokyo",
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                "Favourite Cuisine",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              color: Colors.white,
+              child: TextFormField(
+                controller: favouriteCuisineController,
+                maxLines: 2,
+                minLines: 1,
+                decoration: const InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  hintText: "E.g., Italian, Chinese",
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                "Favourite Restaurants",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              color: Colors.white,
+              child: TextFormField(
+                controller: favouriteRestaurantsController,
+                maxLines: 2,
+                minLines: 1,
+                decoration: const InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  hintText: "E.g., Le Bernardin, Din Tai Fung",
+                  border: InputBorder.none,
+                ),
               ),
             ),
             const SizedBox(height: 150)

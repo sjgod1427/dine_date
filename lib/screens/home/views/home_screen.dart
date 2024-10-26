@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     image: user.pictures.isNotEmpty &&
                             Uri.parse(user.pictures.first).isAbsolute
                         ? NetworkImage(user.pictures.first)
-                        : const AssetImage("assets/images/girl.png")
+                        : const AssetImage("assets/icons/Date.png")
                             as ImageProvider,
                   ),
                 ),
@@ -281,7 +281,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => OtherProfileDetailsScreen(user)));
+                      builder: (context) =>
+                          OtherProfileDetailsScreen(_matchEngine, user)));
             },
             icon: const Icon(
               CupertinoIcons.info_circle_fill,
