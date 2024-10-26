@@ -15,25 +15,25 @@ class MyUserEntity {
   final Map<String, dynamic> location;
   final List<dynamic> pictures;
   final List<dynamic> likedBy;
-
-  const MyUserEntity({
-    required this.userId,
-    required this.email,
-    required this.name,
-    required this.age,
-    required this.pronouns,
-    required this.description,
-    required this.MyCrzyFoodStory,
-    required this.Diet,
-    required this.FavouriteResturants, // Update constructor
-    required this.EatingHabits, // Update constructor
-    required this.PlacesWannaVisit, // Update constructor
-    required this.FavouritCuisine, // Update constructor
-    required this.DineInOut, // Update constructor
-    required this.location,
-    required this.pictures,
-    required this.likedBy,
-  });
+  final List<dynamic> reviewed;
+  const MyUserEntity(
+      {required this.userId,
+      required this.email,
+      required this.name,
+      required this.age,
+      required this.pronouns,
+      required this.description,
+      required this.MyCrzyFoodStory,
+      required this.Diet,
+      required this.FavouriteResturants, // Update constructor
+      required this.EatingHabits, // Update constructor
+      required this.PlacesWannaVisit, // Update constructor
+      required this.FavouritCuisine, // Update constructor
+      required this.DineInOut, // Update constructor
+      required this.location,
+      required this.pictures,
+      required this.likedBy,
+      required this.reviewed});
 
   Map<String, Object?> toDocument() {
     return {
@@ -53,27 +53,28 @@ class MyUserEntity {
       'location': location,
       'pictures': pictures,
       'likedBy': likedBy,
+      'reviewed': reviewed
     };
   }
 
   static MyUserEntity fromDocument(Map<String, dynamic> doc) {
     return MyUserEntity(
-      userId: doc['userId'],
-      email: doc['email'],
-      name: doc['name'],
-      age: doc['age'],
-      pronouns: doc['pronouns'],
-      description: doc['description'],
-      MyCrzyFoodStory: doc['MyCrzyFoodStory'],
-      Diet: doc['Diet'],
-      FavouriteResturants: doc['FavouriteResturants'], // Update fromDocument
-      EatingHabits: doc['EatingHabits'], // Update fromDocument
-      PlacesWannaVisit: doc['PlacesWannaVisit'], // Update fromDocument
-      FavouritCuisine: doc['FavouritCuisine'], // Update fromDocument
-      DineInOut: doc['DineInOut'], // Update fromDocument
-      location: doc['location'],
-      pictures: doc['pictures'],
-      likedBy: doc['likedBy'],
-    );
+        userId: doc['userId'],
+        email: doc['email'],
+        name: doc['name'],
+        age: doc['age'],
+        pronouns: doc['pronouns'],
+        description: doc['description'],
+        MyCrzyFoodStory: doc['MyCrzyFoodStory'],
+        Diet: doc['Diet'],
+        FavouriteResturants: doc['FavouriteResturants'], // Update fromDocument
+        EatingHabits: doc['EatingHabits'], // Update fromDocument
+        PlacesWannaVisit: doc['PlacesWannaVisit'], // Update fromDocument
+        FavouritCuisine: doc['FavouritCuisine'], // Update fromDocument
+        DineInOut: doc['DineInOut'], // Update fromDocument
+        location: doc['location'],
+        pictures: doc['pictures'],
+        likedBy: doc['likedBy'],
+        reviewed: doc['reviewed']);
   }
 }

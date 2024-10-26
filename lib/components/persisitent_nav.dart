@@ -50,7 +50,7 @@ class _PersistentTabScreenState extends State<PersistentTabScreen> {
               SetupDataBloc(context.read<AuthenticationBloc>().userRepository),
         ),
       ],
-      child: const HomeScreen(),
+      child: HomeScreen(),
     ),
 
     Matches(), // Your Home Screen widget
