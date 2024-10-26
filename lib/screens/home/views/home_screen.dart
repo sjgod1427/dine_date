@@ -193,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
       endDrawer: MainDrawer(context: context),
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        leading: ElevatedButton(
+        leading: IconButton(
           onPressed: () async {
             final user = FirebaseAuth.instance.currentUser;
             //           if (user == null) {
@@ -219,7 +219,10 @@ class _HomeScreenState extends State<HomeScreen> {
             // }
             rebootStack(user!);
           },
-          child: const Text("Reboot Stack"),
+          icon: Visibility(
+            visible: items.isEmpty ? true : false,
+            child: Icon(Icons.refresh),
+          ),
         ),
         actions: [
           Builder(builder: (context) {
