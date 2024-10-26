@@ -229,7 +229,10 @@ class FirebaseUserRepo implements UserRepository {
         {
           'description': myUser.description,
           'pictures': myUser.pictures,
-          'MyCrzyFoodStory': myUser.MyCrzyFoodStory
+          'MyCrzyFoodStory': myUser.MyCrzyFoodStory,
+          'Diet': myUser.Diet,
+          'EatingHabits': myUser.EatingHabits,
+          'DineInOut': myUser.DineInOut
         },
       );
 

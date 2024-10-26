@@ -6,21 +6,32 @@ class MyUserEntity {
   final String description;
   final String MyCrzyFoodStory;
   final String Diet;
+  final String FavouriteResturants; // New field
+  final String EatingHabits; // New field
+  final String PlacesWannaVisit; // New field
+  final String FavouritCuisine; // New field
+  final String DineInOut; // New field
   final Map<String, dynamic> location;
   final List<dynamic> pictures;
   final List<dynamic> likedBy;
 
-  const MyUserEntity(
-      {required this.userId,
-      required this.email,
-      required this.name,
-      required this.age,
-      required this.description,
-      required this.MyCrzyFoodStory,
-      required this.Diet,
-      required this.location,
-      required this.pictures,
-      required this.likedBy});
+  const MyUserEntity({
+    required this.userId,
+    required this.email,
+    required this.name,
+    required this.age,
+    required this.description,
+    required this.MyCrzyFoodStory,
+    required this.Diet,
+    required this.FavouriteResturants, // Update constructor
+    required this.EatingHabits, // Update constructor
+    required this.PlacesWannaVisit, // Update constructor
+    required this.FavouritCuisine, // Update constructor
+    required this.DineInOut, // Update constructor
+    required this.location,
+    required this.pictures,
+    required this.likedBy,
+  });
 
   Map<String, Object?> toDocument() {
     return {
@@ -31,23 +42,34 @@ class MyUserEntity {
       'description': description,
       'MyCrzyFoodStory': MyCrzyFoodStory,
       'Diet': Diet,
+      'FavouriteResturants': FavouriteResturants, // Add to document
+      'EatingHabits': EatingHabits, // Add to document
+      'PlacesWannaVisit': PlacesWannaVisit, // Add to document
+      'FavouritCuisine': FavouritCuisine, // Add to document
+      'DineInOut': DineInOut, // Add to document
       'location': location,
       'pictures': pictures,
-      'likedBy': likedBy
+      'likedBy': likedBy,
     };
   }
 
   static MyUserEntity fromDocument(Map<String, dynamic> doc) {
     return MyUserEntity(
-        userId: doc['userId'],
-        email: doc['email'],
-        name: doc['name'],
-        age: doc['age'],
-        description: doc['description'],
-        MyCrzyFoodStory: doc['MyCrzyFoodStory'],
-        Diet: doc['Diet'],
-        location: doc['location'],
-        pictures: doc['pictures'],
-        likedBy: doc['likedBy']);
+      userId: doc['userId'],
+      email: doc['email'],
+      name: doc['name'],
+      age: doc['age'],
+      description: doc['description'],
+      MyCrzyFoodStory: doc['MyCrzyFoodStory'],
+      Diet: doc['Diet'],
+      FavouriteResturants: doc['FavouriteResturants'], // Update fromDocument
+      EatingHabits: doc['EatingHabits'], // Update fromDocument
+      PlacesWannaVisit: doc['PlacesWannaVisit'], // Update fromDocument
+      FavouritCuisine: doc['FavouritCuisine'], // Update fromDocument
+      DineInOut: doc['DineInOut'], // Update fromDocument
+      location: doc['location'],
+      pictures: doc['pictures'],
+      likedBy: doc['likedBy'],
+    );
   }
 }
