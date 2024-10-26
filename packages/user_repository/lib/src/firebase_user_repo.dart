@@ -226,7 +226,11 @@ class FirebaseUserRepo implements UserRepository {
       myUser.pictures.addAll(tempURL);
 
       await usersCollection.doc(myUser.userId).update(
-        {'description': myUser.description, 'pictures': myUser.pictures},
+        {
+          'description': myUser.description,
+          'pictures': myUser.pictures,
+          'MyCrzyFoodStory': myUser.MyCrzyFoodStory
+        },
       );
 
       return myUser;

@@ -8,6 +8,8 @@ class MyUser {
   final String name;
   final int age;
   String description;
+  String MyCrzyFoodStory;
+  String Diet;
   final Map<String, dynamic> location;
   List<dynamic> pictures;
   final List<dynamic> likedBy;
@@ -18,6 +20,8 @@ class MyUser {
     required this.name,
     required this.age,
     required this.description,
+    required this.MyCrzyFoodStory,
+    required this.Diet,
     required this.location,
     required this.pictures,
     required this.likedBy,
@@ -30,6 +34,8 @@ class MyUser {
     name: '',
     age: 0,
     description: '',
+    MyCrzyFoodStory: '',
+    Diet: '',
     location: {},
     pictures: [],
     likedBy: [],
@@ -44,6 +50,8 @@ class MyUser {
       name: data['name'] ?? 'Unknown',
       age: data['age'] ?? 0,
       description: data['description'] ?? '',
+      MyCrzyFoodStory: data['MyCrzyFoodStory'] ?? '',
+      Diet: data['Diet'] ?? '',
       location: Map<String, dynamic>.from(data['location'] ?? {}),
       pictures: List<dynamic>.from(data['pictures'] ?? []),
       likedBy: List<dynamic>.from(data['likedBy'] ?? []),
@@ -57,6 +65,8 @@ class MyUser {
     String? name,
     int? age,
     String? description,
+    String? MyCrzyFoodStory,
+    String? Diet,
     Map<String, dynamic>? location,
     List<dynamic>? pictures,
     List<dynamic>? likedBy,
@@ -67,6 +77,8 @@ class MyUser {
       name: name ?? this.name,
       age: age ?? this.age,
       description: description ?? this.description,
+      MyCrzyFoodStory: MyCrzyFoodStory ?? this.MyCrzyFoodStory,
+      Diet: Diet ?? this.Diet,
       location: location ?? this.location,
       pictures: pictures ?? this.pictures,
       likedBy: likedBy ?? this.likedBy,
@@ -81,6 +93,8 @@ class MyUser {
       name: name,
       age: age,
       description: description,
+      MyCrzyFoodStory: MyCrzyFoodStory,
+      Diet: Diet,
       location: location,
       pictures: pictures,
       likedBy: likedBy,
@@ -95,6 +109,8 @@ class MyUser {
       name: entity.name,
       age: entity.age,
       description: entity.description,
+      MyCrzyFoodStory: entity.MyCrzyFoodStory,
+      Diet: entity.Diet,
       location: entity.location,
       pictures: entity.pictures,
       likedBy: entity.likedBy,
@@ -108,7 +124,9 @@ class MyUser {
   email: $email, 
   name: $name,
   age: $age,
-  description: $description, 
+  description: $description,
+  MyCrzyFoodStory: $MyCrzyFoodStory,
+  Diet: $Diet,
   location: $location,
   pictures: $pictures,
   likedBy: $likedBy

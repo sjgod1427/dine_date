@@ -5,10 +5,6 @@ import 'package:user_repository/src/models/user.dart';
 import 'models/models.dart';
 
 abstract class UserRepository {
-  final FirebaseFirestore firestore;
-
-  UserRepository({required this.firestore});
-
   Stream<MyUser?> get user;
 
   Future<MyUser> signUp(MyUser myUser, String password);

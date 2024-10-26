@@ -4,6 +4,8 @@ class MyUserEntity {
   final String name;
   final int age;
   final String description;
+  final String MyCrzyFoodStory;
+  final String Diet;
   final Map<String, dynamic> location;
   final List<dynamic> pictures;
   final List<dynamic> likedBy;
@@ -14,6 +16,8 @@ class MyUserEntity {
       required this.name,
       required this.age,
       required this.description,
+      required this.MyCrzyFoodStory,
+      required this.Diet,
       required this.location,
       required this.pictures,
       required this.likedBy});
@@ -25,6 +29,8 @@ class MyUserEntity {
       'name': name,
       'age': age,
       'description': description,
+      'MyCrzyFoodStory': MyCrzyFoodStory,
+      'Diet': Diet,
       'location': location,
       'pictures': pictures,
       'likedBy': likedBy
@@ -38,6 +44,8 @@ class MyUserEntity {
         name: doc['name'],
         age: doc['age'],
         description: doc['description'],
+        MyCrzyFoodStory: doc['MyCrzyFoodStory'],
+        Diet: doc['Diet'],
         location: doc['location'],
         pictures: doc['pictures'],
         likedBy: doc['likedBy']);

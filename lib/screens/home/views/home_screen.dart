@@ -181,11 +181,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: user.pictures.isNotEmpty
+                    image: user.pictures.isNotEmpty &&
+                            Uri.parse(user.pictures.first).isAbsolute
                         ? NetworkImage(user.pictures.first)
-                        : const AssetImage(
-                            "assets/images/girl.png",
-                          ),
+                        : const AssetImage("assets/images/girl.png")
+                            as ImageProvider,
                   ),
                 ),
               ),
