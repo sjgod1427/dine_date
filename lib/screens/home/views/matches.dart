@@ -97,6 +97,7 @@ import 'package:dine_date/components/payment_gateway.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:user_repository/src/models/user.dart';
 
 class Matches extends StatefulWidget {
@@ -215,7 +216,8 @@ class _MutualLikesScreenState extends State<Matches> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const RazorPayPage(),
+                              builder: (context) =>
+                                  PaymentPage(tier: 2, onPaymentSuccess: () {}),
                             ),
                           );
                         },
