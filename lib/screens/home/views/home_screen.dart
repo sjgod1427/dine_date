@@ -196,27 +196,6 @@ class _HomeScreenState extends State<HomeScreen> {
         leading: IconButton(
           onPressed: () async {
             final user = FirebaseAuth.instance.currentUser;
-            //           if (user == null) {
-            //             print('No user is currently signed in');
-            //             return null;
-            //           }
-            //           final String userId = user.uid; // Get user ID
-            // final FirebaseFirestore firestore = FirebaseFirestore.instance;
-            //       try {
-            //   DocumentSnapshot snapshot = await firestore.collection('users').doc(userId).get(); // Step 3
-
-            //   if (snapshot.exists) {
-            //     // Assuming MyUser is your model class for user data
-            //     //return MyUser.fromFirestore(snapshot); // Parse the data into your model
-            //     print("user exists");
-            //   } else {
-            //     print('User document does not exist');
-            //     return null;
-            //   }
-            // } catch (e) {
-            //   print('Error retrieving user data: $e');
-            //   return null;
-            // }
             rebootStack(user!);
           },
           icon: Visibility(
@@ -241,28 +220,31 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 50),
-              child: Image.asset(
-                "assets/icons/Carrying Love.png",
-                scale: 10,
+        title: Padding(
+          padding: const EdgeInsets.only(right: 40.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 50),
+                child: Image.asset(
+                  "assets/icons/Carrying Love.png",
+                  scale: 10,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 0),
-              child: Text(
-                'Foodie',
-                style: TextStyle(
-                    fontFamily: 'Cursive',
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 30),
-              ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(right: 0),
+                child: Text(
+                  'Foodie',
+                  style: TextStyle(
+                      fontFamily: 'Cursive',
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 30),
+                ),
+              )
+            ],
+          ),
         ),
       ),
       body: items.isEmpty

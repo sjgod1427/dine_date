@@ -563,7 +563,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 40),
             Column(
               children: [
                 const Padding(
@@ -626,7 +626,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 45),
             Column(
               children: [
                 const Padding(
@@ -687,7 +687,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 45),
             Column(
               children: [
                 const Padding(
@@ -739,7 +739,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 40),
             Column(
               children: [
                 const Padding(
@@ -792,7 +792,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
 
-            SizedBox(height: 30),
+            SizedBox(height: 40),
             Column(
               children: [
                 const Padding(
