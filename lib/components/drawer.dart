@@ -164,8 +164,8 @@ class MainDrawer extends StatelessWidget {
                   Color.fromARGB(255, 244, 92, 82),
                   Color.fromARGB(255, 247, 201, 198),
                 ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                begin: Alignment.bottomRight,
+                end: Alignment.topLeft,
               ),
             ),
             child: Row(
@@ -180,10 +180,10 @@ class MainDrawer extends StatelessWidget {
                 Text(
                   'YOUR TYPE',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: 'Cursive',
-                      ),
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Cursive',
+                      fontWeight: FontWeight.w900),
                 ),
               ],
             ),
@@ -199,11 +199,11 @@ class MainDrawer extends StatelessWidget {
                     userPreferences.selectedEatingHabits, 'eatingHabits'),
                 buildToggleSection("Dine-In/Dine-Out",
                     userPreferences.selectedDineInOut, 'dineInOut'),
-                IconButton(
-                    onPressed: () {
-                      context.read<SignInBloc>().add(const SignOutRequired());
-                    },
-                    icon: const Icon(Icons.logout))
+                // IconButton(
+                //     onPressed: () {
+                //       context.read<SignInBloc>().add(const SignOutRequired());
+                //     },
+                //     icon: const Icon(Icons.logout))
               ],
             ),
           ),

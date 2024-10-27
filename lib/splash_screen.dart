@@ -25,7 +25,7 @@ class _SplashScreen extends State<SplashScreen> {
   }
 
   startTimer() {
-    var duration = const Duration(seconds: 3);
+    var duration = const Duration(seconds: 4);
     return Timer(duration, route);
   }
 
@@ -35,7 +35,7 @@ class _SplashScreen extends State<SplashScreen> {
       context,
       PageRouteBuilder(
         settings: RouteSettings(name: '/app'),
-        transitionDuration: Duration(milliseconds: 600), // Name of the route
+        transitionDuration: Duration(seconds: 5), // Name of the route
         pageBuilder: (context, animation, secondaryAnimation) => MyApp(
             FirebaseUserRepo(),
             FirebaseAuth.instance,
@@ -75,3 +75,69 @@ Widget content() {
             Lottie.asset('assets/animations/Animation - 1729742973034.json')),
   );
 }
+
+// import 'dart:async';
+// import 'package:dine_date/app.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:flutter/material.dart';
+// import 'package:lottie/lottie.dart';
+// import 'package:user_repository/user_repository.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
+// class SplashScreen extends StatefulWidget {
+//   const SplashScreen({super.key});
+
+//   @override
+//   State<SplashScreen> createState() => _SplashScreen();
+// }
+
+// class _SplashScreen extends State<SplashScreen> {
+//   @override
+//   void initState() {
+//     super.initState();
+//     startTimer();
+//   }
+
+//   startTimer() {
+//     var duration = const Duration(seconds: 10);
+//     return Timer(duration, route);
+//   }
+
+//   route() {
+//     Navigator.pushReplacement(
+//       context,
+//       PageRouteBuilder(
+//         settings: const RouteSettings(name: '/app'),
+//         transitionDuration: const Duration(seconds: 5),
+//         pageBuilder: (context, animation, secondaryAnimation) => MyApp(
+//             FirebaseUserRepo(),
+//             FirebaseAuth.instance,
+//             FirebaseFirestore.instance),
+//         transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//           return FadeTransition(
+//             opacity: animation,
+//             child: child,
+//           );
+//         },
+//       ),
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       body: Center(
+//         child: Container(
+//           padding: const EdgeInsets.all(20.0),
+//           child: Lottie.asset(
+//             'assets/animations/Animation - 1729742973034.json',
+//             width: 400, // Set constraints if needed
+//             height: 400,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

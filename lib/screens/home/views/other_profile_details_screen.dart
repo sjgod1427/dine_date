@@ -759,63 +759,8 @@ class _OtherProfileDetailsScreenState extends State<OtherProfileDetailsScreen> {
                 child: Row(
                   children: [
                     // Clear button
-                    Expanded(
-                      child: Material(
-                        color: Theme.of(context).colorScheme.primary,
-                        elevation: 3,
-                        borderRadius: BorderRadius.circular(100),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(100),
-                          onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen(
-                                        // widget.matchEngine: widget.matchEngine,
-                                        )));
-                          },
-                          child: Container(
-                            height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "Clear",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
+
                     // Save button
-                    Expanded(
-                      child: Material(
-                        color: Theme.of(context).colorScheme.primary,
-                        elevation: 3,
-                        borderRadius: BorderRadius.circular(100),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(100),
-                          onTap: () {
-                            // Handle saving the profile or any other functionality
-                          },
-                          child: Container(
-                            height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "Save",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
