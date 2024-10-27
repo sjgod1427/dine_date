@@ -19,6 +19,7 @@ void main() async {
     ChangeNotifierProvider(
       create: (context) => UserPreferences(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => const SplashScreen(),
           '/app': (context) => MyApp(
