@@ -1,13 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dine_date/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:dine_date/blocs/setup_data_bloc/setup_data_bloc.dart';
+import 'package:dine_date/components/persisitent_nav.dart';
 import 'package:dine_date/screens/auth/blocs/sign_in_bloc/sign_in_bloc_bloc.dart';
 import 'package:dine_date/components/my_text_field.dart';
 import 'package:dine_date/screens/home/views/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:dine_date/screens/auth/views/test.dart';
 //import 'package:dine_date/screens/auth/views/welcome_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:rive/rive.dart';
+import 'package:user_repository/user_repository.dart';
 
 //import '../blocs/sign_in_bloc/sign_in_bloc.dart';
 //import '../../../components/my_text_field.dart';
@@ -149,8 +156,37 @@ class _SignInScreenState extends State<SignInScreen> {
       listener: (context, state) {
         if (state is SignInSuccess) {
           Future.delayed(const Duration(seconds: 2), () {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => MultiBlocProvider(
+                providers: [
+                  // First, provide the AuthenticationBloc
+                  BlocProvider(
+                    create: (context) => AuthenticationBloc(
+                      userRepository:
+                          context.read<UserRepository>(), // Pass UserRepository
+                      firebaseAuth: FirebaseAuth
+                          .instance, // Assuming you want to initialize FirebaseAuth
+                      firestore: FirebaseFirestore
+                          .instance, // Assuming you want to initialize Firestore
+                    ),
+                  ),
+                  // Next, provide SignInBloc, which depends on AuthenticationBloc
+                  BlocProvider(
+                    create: (context) => SignInBloc(
+                      userRepository:
+                          context.read<AuthenticationBloc>().userRepository,
+                      // Add necessary initialization
+                    ),
+                  ),
+                  // Lastly, provide SetupDataBloc
+                  BlocProvider(
+                    create: (context) => SetupDataBloc(
+                        context.read<AuthenticationBloc>().userRepository),
+                  ),
+                ],
+                child: PersistentTabScreen(),
+              ),
+            ));
           });
         } else if (state is SignInFailure) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

@@ -139,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 context.read<SignInBloc>().add(const SignOutRequired());
               },
-              icon: const Icon(Icons.login))
+              icon: const Icon(Icons.logout))
         ],
       ),
       body: GestureDetector(

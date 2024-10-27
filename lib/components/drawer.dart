@@ -139,6 +139,7 @@
 // }
 
 // main_drawer.dart
+import 'package:dine_date/screens/auth/blocs/sign_in_bloc/sign_in_bloc_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -198,6 +199,11 @@ class MainDrawer extends StatelessWidget {
                     userPreferences.selectedEatingHabits, 'eatingHabits'),
                 buildToggleSection("Dine-In/Dine-Out",
                     userPreferences.selectedDineInOut, 'dineInOut'),
+                IconButton(
+                    onPressed: () {
+                      context.read<SignInBloc>().add(const SignOutRequired());
+                    },
+                    icon: const Icon(Icons.logout))
               ],
             ),
           ),

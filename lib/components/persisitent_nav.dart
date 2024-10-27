@@ -56,6 +56,16 @@ class _PersistentTabScreenState extends State<PersistentTabScreen> {
     Matches(), // Your Home Screen widget
     MultiBlocProvider(
       providers: [
+        // BlocProvider(
+        //   create: (context) => AuthenticationBloc(
+        //     userRepository:
+        //         context.read<UserRepository>(), // Pass UserRepository
+        //     firebaseAuth: FirebaseAuth
+        //         .instance, // Assuming you want to initialize FirebaseAuth
+        //     firestore: FirebaseFirestore
+        //         .instance, // Assuming you want to initialize Firestore
+        //   ),
+        // ),
         BlocProvider(
           create: (context) => SignInBloc(
               userRepository:
