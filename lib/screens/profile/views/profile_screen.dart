@@ -339,241 +339,509 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   }),
             ),
+            const SizedBox(height: 30), //ITHTHE
+            Column(
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 250), // Adjust alignment as needed
+                  child: Text(
+                    "Pronouns",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      fontFamily: 'Cursive',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  color: Colors.white,
+                  child: DropdownButtonFormField<String>(
+                    value: selectedPronoun.isEmpty ? null : selectedPronoun,
+                    items: pronounOptions.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12), // Same radius
+                        borderSide: BorderSide(
+                          color: Colors.grey, // Same border color
+                          width: 2.0, // Same border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.blue, // Focus color
+                          width: 2.0,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                    ),
+                    hint: const Text("Select your pronoun"),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedPronoun = newValue ?? '';
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(height: 30),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 250), // Adjust alignment as needed
+                  child: Text(
+                    "About me",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      fontFamily: 'Cursive',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Container(
+                  color: Colors.white,
+                  child: TextFormField(
+                    controller: descriptionController,
+                    maxLines: 10,
+                    minLines: 1,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      hintText: "About me",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12), // Same radius
+                        borderSide: BorderSide(
+                          color: Colors.grey, // Same border color
+                          width: 2.0, // Same border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.blue, // Focus color
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
             const SizedBox(height: 30),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Pronouns",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              child: DropdownButtonFormField<String>(
-                value: selectedPronoun.isEmpty ? null : selectedPronoun,
-                items: pronounOptions.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            Column(
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 150), // Adjust alignment as needed
+                  child: Text(
+                    "My Crazy Food Story",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      fontFamily: 'Cursive',
+                    ),
+                  ),
                 ),
-                hint: const Text("Select your pronoun"),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedPronoun = newValue ?? '';
-                  });
-                },
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "About me",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              child: TextFormField(
-                controller: descriptionController,
-                maxLines: 10,
-                minLines: 1,
-                decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    hintText: "About me",
-                    border: InputBorder.none),
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "My Crazy Food Story",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              child: TextFormField(
-                controller: myStoryController,
-                maxLines: 10,
-                minLines: 1,
-                decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    hintText: "My Crazy Food Story",
-                    border: InputBorder.none),
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Diet",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              child: DropdownButtonFormField<String>(
-                value: selectedDiet.isEmpty ? null : selectedDiet,
-                items: dietOptions.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                const SizedBox(height: 2),
+                Container(
+                  color: Colors.white,
+                  child: TextFormField(
+                    controller: myStoryController,
+                    maxLines: 10,
+                    minLines: 1,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      hintText: "My Crazy Food Story",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12), // Same radius
+                        borderSide: BorderSide(
+                          color: Colors.grey, // Same border color
+                          width: 2.0, // Same border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.blue, // Focus color
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                hint: const Text("Select a diet"),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedDiet = newValue ?? '';
-                  });
-                },
-              ),
+              ],
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Eating Habits",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              child: DropdownButtonFormField<String>(
-                value: selectedEatingHabit.isEmpty ? null : selectedEatingHabit,
-                items: eatingHabitsOptions.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+
+            Column(
+              children: [
+                const SizedBox(height: 30),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 280), // Adjust alignment as needed
+                  child: Text(
+                    "Diet",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      fontFamily: 'Cursive',
+                    ),
+                  ),
                 ),
-                hint: const Text("Select an eating habit"),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedEatingHabit = newValue ?? '';
-                  });
-                },
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Dine In/Out",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              child: DropdownButtonFormField<String>(
-                value: selectedDineInOut.isEmpty ? null : selectedDineInOut,
-                items: dineInOutOptions.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                const SizedBox(height: 2),
+                Container(
+                  color: Colors.white,
+                  child: DropdownButtonFormField<String>(
+                    value: selectedDiet.isEmpty ? null : selectedDiet,
+                    items: dietOptions.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12), // Same radius
+                        borderSide: BorderSide(
+                          color: Colors.grey, // Same border color
+                          width: 2.0, // Same border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.blue, // Focus color
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                    hint: const Text("Select a diet"),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedDiet = newValue ?? '';
+                      });
+                    },
+                  ),
                 ),
-                hint: const Text("Select a Dine In/Out preference"),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedDineInOut = newValue ?? '';
-                  });
-                },
-              ),
+              ],
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Places I Want to Visit",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              child: TextFormField(
-                controller: placesWannaVisitController,
-                maxLines: 2,
-                minLines: 1,
-                decoration: const InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  hintText: "E.g., Paris, Tokyo",
-                  border: InputBorder.none,
+            SizedBox(height: 30),
+            Column(
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 210), // Adjust alignment as needed
+                  child: Text(
+                    "Eating Habits",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      fontFamily: 'Cursive',
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Favourite Cuisine",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              child: TextFormField(
-                controller: favouriteCuisineController,
-                maxLines: 2,
-                minLines: 1,
-                decoration: const InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  hintText: "E.g., Italian, Chinese",
-                  border: InputBorder.none,
+                const SizedBox(height: 2),
+                Container(
+                  color: Colors.white,
+                  child: DropdownButtonFormField<String>(
+                    value: selectedEatingHabit.isEmpty
+                        ? null
+                        : selectedEatingHabit,
+                    items: eatingHabitsOptions.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12), // Same radius
+                        borderSide: BorderSide(
+                          color: Colors.grey, // Same border color
+                          width: 2.0, // Same border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.blue, // Focus color
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                    hint: const Text("Select an eating habit"),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedEatingHabit = newValue ?? '';
+                      });
+                    },
+                  ),
                 ),
-              ),
+              ],
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                "Favourite Restaurants",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              child: TextFormField(
-                controller: favouriteRestaurantsController,
-                maxLines: 2,
-                minLines: 1,
-                decoration: const InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  hintText: "E.g., Le Bernardin, Din Tai Fung",
-                  border: InputBorder.none,
+            SizedBox(height: 30),
+            Column(
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 220), // Adjust alignment as needed
+                  child: Text(
+                    "Dine In/Out",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      fontFamily: 'Cursive',
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(height: 2),
+                Container(
+                  color: Colors.white,
+                  child: DropdownButtonFormField<String>(
+                    value: selectedDineInOut.isEmpty ? null : selectedDineInOut,
+                    items: dineInOutOptions.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12), // Same radius
+                        borderSide: BorderSide(
+                          color: Colors.grey, // Same border color
+                          width: 2.0, // Same border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.blue, // Focus color
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                    hint: const Text("Select a Dine In/Out preference"),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedDineInOut = newValue ?? '';
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 30),
+            Column(
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 145), // Adjust alignment as needed
+                  child: Text(
+                    "Places I Want to Visit",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      fontFamily: 'Cursive',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Container(
+                  color: Colors.white,
+                  child: TextFormField(
+                    controller: placesWannaVisitController,
+                    maxLines: 2,
+                    minLines: 1,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      hintText: "E.g., Paris, Tokyo",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12), // Same radius
+                        borderSide: BorderSide(
+                          color: Colors.grey, // Same border color
+                          width: 2.0, // Same border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.blue, // Focus color
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 30),
+            Column(
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.only(right: 185), // Adjust alignment as needed
+                  child: Text(
+                    "Favourite Cuisine",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      fontFamily: 'Cursive',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Container(
+                  color: Colors.white,
+                  child: TextFormField(
+                    controller: favouriteCuisineController,
+                    maxLines: 2,
+                    minLines: 1,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      hintText: "E.g., Italian, Chinese",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12), // Same radius
+                        borderSide: BorderSide(
+                          color: Colors.grey, // Same border color
+                          width: 2.0, // Same border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.blue, // Focus color
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 30),
+            Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(right: 150),
+                  child: Text(
+                    "Favourite Restaurants",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 20,
+                        fontFamily: 'Cursive'),
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Container(
+                  color: Colors.white,
+                  child: TextFormField(
+                    controller: favouriteRestaurantsController,
+                    maxLines: 2,
+                    minLines: 1,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      hintText: "E.g., Le Bernardin, Din Tai Fung",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                            12), // Adjust radius as needed
+                        borderSide: BorderSide(
+                          color: Colors.grey, // Set border color
+                          width: 2.0, // Set border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.blue, // Color when the field is focused
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 150)
           ],
