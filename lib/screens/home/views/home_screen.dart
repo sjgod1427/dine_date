@@ -5,6 +5,7 @@ import 'package:dine_date/components/drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:swipe_cards/draggable_card.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -154,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   superlikeAction: () {
                     log("Superlike user: ${user.userId}");
+                    updateLikedBy(currentUser.uid, user.userId);
                     updatedReviewd(currentUser.uid, user.userId);
                   },
                   onSlideUpdate: (SlideRegion? region) async {
@@ -248,12 +250,33 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: items.isEmpty
-          ? const Center(child: Text("No Items"))
+          ? Padding(
+              padding: const EdgeInsets.only(bottom: 100),
+              child: Center(
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  // Add this
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Lottie.asset('assets/animations/no_users.json'),
+                    ],
+                  ),
+                ),
+              ),
+            )
           : SwipeCards(
               matchEngine: _matchEngine,
               upSwipeAllowed: true,
               onStackFinished: () {
-                log("No more users to swipe.");
+                Center(
+                    child: Container(
+                  height: 200,
+                  width: 200,
+                  child: Lottie.asset('assets/animations/no_users.json'),
+                ));
+                return log("No more users to swipe.");
               },
               itemBuilder: (context, i) {
                 final user = items[i].content as MyUser;
@@ -449,7 +472,7 @@ class _HomeScreenState extends State<HomeScreen> {
           heroTag: null,
           backgroundColor: Colors.white,
           onPressed: () {
-            _matchEngine.currentItem?.like();
+            _matchEngine.currentItem?.superLike();
           },
           child: const Icon(Icons.star, color: Colors.lightBlue, size: 32),
         ),
@@ -457,7 +480,7 @@ class _HomeScreenState extends State<HomeScreen> {
           heroTag: null,
           backgroundColor: Colors.white,
           onPressed: () {
-            _matchEngine.currentItem?.superLike();
+            _matchEngine.currentItem?.like();
           },
           child: const Icon(Icons.favorite, color: Colors.green, size: 32),
         ),

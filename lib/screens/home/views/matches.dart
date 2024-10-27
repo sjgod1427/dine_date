@@ -97,6 +97,7 @@ import 'package:dine_date/components/payment_gateway.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lottie/lottie.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:user_repository/src/models/user.dart';
 
@@ -157,10 +158,34 @@ class _MutualLikesScreenState extends State<Matches> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Mutual Likes"),
-      ),
+          title: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+        child: Text(
+          'Mutual likes',
+          style: TextStyle(
+              fontFamily: 'Cursive',
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.w900,
+              fontSize: 30),
+        ),
+      )),
       body: mutualLikedUsers.isEmpty
-          ? const Center(child: Text("No mutual likes found"))
+          ? Padding(
+              padding: const EdgeInsets.only(bottom: 100),
+              child: Center(
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  // Add this
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Lottie.asset('assets/animations/no_matches.json'),
+                    ],
+                  ),
+                ),
+              ),
+            ) ////ITHTHEEE
           : GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // Number of columns in the grid
