@@ -1,4 +1,5 @@
-Foodie
+#Foodie
+
 Foodie is a Flutter-based app designed to connect people through shared food interests, helping users find like-minded matches who enjoy the same cuisines, dietary preferences, and culinary experiences. Tailored for food enthusiasts, Foodie combines social discovery with a unique focus on food preferences.
 
 Key Features
