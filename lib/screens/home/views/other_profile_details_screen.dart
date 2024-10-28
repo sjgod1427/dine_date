@@ -417,9 +417,9 @@ import 'package:user_repository/src/models/user.dart';
 
 class OtherProfileDetailsScreen extends StatefulWidget {
   final MyUser user;
-  final MatchEngine matchEngine;
+  //final MatchEngine matchEngine;
 
-  const OtherProfileDetailsScreen(this.matchEngine, this.user, {super.key});
+  const OtherProfileDetailsScreen(this.user, {super.key});
 
   @override
   State<OtherProfileDetailsScreen> createState() =>

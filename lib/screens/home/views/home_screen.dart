@@ -442,8 +442,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    OtherProfileDetailsScreen(_matchEngine, user),
+                builder: (context) => OtherProfileDetailsScreen(user),
               ),
             );
           },
