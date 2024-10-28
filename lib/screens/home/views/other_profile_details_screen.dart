@@ -403,9 +403,12 @@
 //       : const SizedBox.shrink(); // Hides the section if content is empty
 // }
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dine_date/screens/home/views/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -425,6 +428,86 @@ class OtherProfileDetailsScreen extends StatefulWidget {
 
 class _OtherProfileDetailsScreenState extends State<OtherProfileDetailsScreen> {
   int currentPhoto = 0;
+  final currentUser = FirebaseAuth.instance.currentUser;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // Future<String> getLocation(User user, MyUser otherUser) async {
+  //   DocumentSnapshot userDocs =
+  //       await _firestore.collection("users").doc(currentUser?.uid).get();
+  //   Map<String, dynamic> locationMap = userDocs["location"];
+  //   double latitude = locationMap['latitude'];
+  //   double longitude = locationMap['longitude'];
+  //   double otherLatitude = otherUser.location['latitude'];
+  //   double otherLongitude = otherUser.location['longitude'];
+  //   if (locationMap == null ||
+  //       locationMap['latitude'] == null ||
+  //       locationMap['longitude'] == null ||
+  //       otherUser.location['latitude'] == null ||
+  //       otherUser.location['longitude'] == null) {
+  //     return "Location data missing";
+  //   } else {
+  //     double distance = await Geolocator.distanceBetween(
+  //         latitude, longitude, otherLatitude, otherLongitude);
+  //     print(distance);
+  //     return distance.toString();
+  //   }
+  // }
+
+  // Future<String?> getLocation(User user, MyUser otherUser) async {
+  //   DocumentSnapshot userDocs =
+  //       await _firestore.collection("users").doc(user.uid).get();
+
+  //   // Safely access latitude and longitude fields
+  //   Map<String, dynamic>? locationMap = userDocs["location"];
+  //   if (locationMap == null ||
+  //       locationMap['latitude'] == null ||
+  //       locationMap['longitude'] == null ||
+  //       otherUser.location['latitude'] == null ||
+  //       otherUser.location['longitude'] == null) {
+  //     return "Location data missing";
+  //   }
+
+  //   double latitude = locationMap['latitude'];
+  //   double longitude = locationMap['longitude'];
+  //   double otherLatitude = otherUser.location['latitude'];
+  //   double otherLongitude = otherUser.location['longitude'];
+
+  //   double distance = await Geolocator.distanceBetween(
+  //       latitude, longitude, otherLatitude, otherLongitude);
+  //   print("Distance calculated: $distance meters");
+  //   return distance.toString();
+  // }
+
+  Future<String> getLocation(User user, MyUser otherUser) async {
+    DocumentSnapshot userDocs =
+        await _firestore.collection("users").doc(user.uid).get();
+
+    // Null checks
+    Map<String, dynamic>? locationMap = userDocs["location"];
+    if (locationMap == null ||
+        locationMap['lat'] == null ||
+        locationMap['lng'] == null ||
+        otherUser.location['lat'] == null ||
+        otherUser.location['lng'] == null) {
+      // print("Distance calculated: $distance meters");
+      print(
+          "User document data: ${userDocs.data()}"); // Check user document data
+      print(
+          "Other user location data: ${otherUser.location}"); // Check other user location
+      return "Location data missing";
+    }
+
+    double latitude = locationMap['lat'];
+    double longitude = locationMap['lng'];
+    double otherLatitude = otherUser.location['lat'];
+    double otherLongitude = otherUser.location['lng'];
+
+    double distance = Geolocator.distanceBetween(
+            latitude, longitude, otherLatitude, otherLongitude) /
+        1000;
+    print("Distance calculated: $distance km");
+    return "${distance.toStringAsFixed(2)} km"; // Format distance for readability
+  }
 
   TextStyle nameAgeStyle = const TextStyle(
     color: Colors.black,
@@ -660,37 +743,103 @@ class _OtherProfileDetailsScreenState extends State<OtherProfileDetailsScreen> {
                           const SizedBox(height: 5),
                           Row(
                             children: [
-                              Icon(
-                                CupertinoIcons.placemark,
-                                color: Colors.grey.shade600,
-                                size: 15,
-                              ),
-                              const SizedBox(width: 5),
-                              Container(
-                                padding: const EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.surface,
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
+                              // Visibility(
+                              //   visible: widget.user.location.isNotEmpty,
+                              //   child: Icon(
+                              //     CupertinoIcons.placemark,
+                              //     color: Colors.grey.shade600,
+                              //     size: 15,
+                              //   ),
+                              // ),
+                              // const SizedBox(width: 5),
+                              // Visibility(
+                              //   visible: widget.user.location.isNotEmpty,
+                              //   child: Container(
+                              //     padding: const EdgeInsets.all(8.0),
+                              //     decoration: BoxDecoration(
+                              //       color:
+                              //           Theme.of(context).colorScheme.surface,
+                              //       borderRadius: BorderRadius.circular(12),
+                              //       border: Border.all(
+                              //           color: Theme.of(context)
+                              //               .colorScheme
+                              //               .primary,
+                              //           width: 2),
+                              //       boxShadow: [
+                              //         BoxShadow(
+                              //           color: Colors.grey.withOpacity(0.3),
+                              //           spreadRadius: 2,
+                              //           blurRadius: 5,
+                              //           offset: const Offset(0, 3),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //     child: Text(
+                              //       "${getLocation(currentUser!, widget.user)} km away",
+                              //       style: TextStyle(
+                              //           fontFamily: 'Cursive',
+                              //           color: Colors.grey.shade600,
+                              //           fontWeight: FontWeight.w300,
+                              //           fontSize: 20),
+                              //     ),
+                              //   ),
+                              // ),
+                              Visibility(
+                                visible: widget.user.location.isNotEmpty,
+                                child: Container(
+                                  padding: const EdgeInsets.all(8.0),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
                                       color:
                                           Theme.of(context).colorScheme.primary,
-                                      width: 2),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: const Offset(0, 3),
+                                      width: 2,
                                     ),
-                                  ],
-                                ),
-                                child: Text(
-                                  "${widget.user.location} km away",
-                                  style: TextStyle(
-                                      fontFamily: 'Cursive',
-                                      color: Colors.grey.shade600,
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: FutureBuilder<String>(
+                                    future: getLocation(
+                                        currentUser!,
+                                        widget
+                                            .user), // Call your async function
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return Text(
+                                          "Calculating distance...",
+                                          style: TextStyle(
+                                              fontFamily: 'Cursive',
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 20),
+                                        ); // Show loading text while waiting
+                                      } else if (snapshot.hasError) {
+                                        return Text(
+                                            "Error: ${snapshot.error}"); // Handle errors
+                                      } else if (snapshot.hasData) {
+                                        return Text(
+                                          "${snapshot.data} away", // Display the distance
+                                          style: TextStyle(
+                                            fontFamily: 'Cursive',
+                                            color: Colors.grey.shade600,
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 20,
+                                          ),
+                                        );
+                                      } else {
+                                        return Text(
+                                            "No distance data available."); // Handle case where no data is available
+                                      }
+                                    },
+                                  ),
                                 ),
                               ),
                             ],
