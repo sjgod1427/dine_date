@@ -178,7 +178,7 @@ class MainDrawer extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'YOUR TYPE',
+                  'Pick',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Colors.white,
                       fontSize: 20,
