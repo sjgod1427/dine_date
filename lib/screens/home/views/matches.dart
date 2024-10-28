@@ -329,7 +329,6 @@ class _MutualLikesScreenState extends State<Matches> {
                             );
                           },
                         ),
-                        // Chat button
                       ],
                     ),
                   ),

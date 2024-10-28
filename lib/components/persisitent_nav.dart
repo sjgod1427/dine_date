@@ -3,6 +3,7 @@ import 'package:dine_date/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:dine_date/blocs/setup_data_bloc/setup_data_bloc.dart';
 import 'package:dine_date/screens/auth/blocs/sign_in_bloc/sign_in_bloc_bloc.dart';
 import 'package:dine_date/screens/home/views/home_screen.dart';
+import 'package:dine_date/screens/home/views/likes.dart';
 import 'package:dine_date/screens/home/views/matches.dart';
 import 'package:dine_date/screens/profile/views/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -52,7 +53,7 @@ class _PersistentTabScreenState extends State<PersistentTabScreen> {
       ],
       child: HomeScreen(),
     ),
-
+    LikedByScreen(),
     Matches(), // Your Home Screen widget
     MultiBlocProvider(
       providers: [
@@ -137,8 +138,9 @@ class CustomBottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround, // Aligns icons evenly
         children: [
           _buildNavItem(Icons.wine_bar_outlined, 0, context),
-          _buildNavItem(Icons.chat, 1, context),
-          _buildNavItem(Icons.person, 2, context)
+          _buildNavItem(Icons.star, 1, context),
+          _buildNavItem(Icons.chat, 2, context),
+          _buildNavItem(Icons.person, 3, context)
         ],
       ),
     );
